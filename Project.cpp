@@ -3,16 +3,15 @@
 #include "objPos.h"
 
 #include "Player.h"
-
+#include "GameMechs.h"
 using namespace std;
 
 #define DELAY_CONST 100000
 
 // global pointer meant to instantiate a player object on the heap
 Player *myPlayer;
+GameMechs *myGM;
 
-
-bool exitFlag;
 
 void Initialize(void);
 void GetInput(void);
@@ -28,7 +27,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -45,10 +44,9 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
+    myGM = new GameMechs();
+    myPlayer = new Player(myGM);
 
-    myPlayer = new Player(nullptr);
-
-    exitFlag = false;
 }
 
 void GetInput(void)
@@ -79,7 +77,7 @@ void CleanUp(void)
     MacUILib_clearScreen();    
 
     delete myPlayer;
-
+    delete myGM;
 
     MacUILib_uninit();
 }

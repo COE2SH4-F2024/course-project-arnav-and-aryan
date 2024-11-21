@@ -7,8 +7,8 @@ Player::Player(GameMechs* thisGMRef)
     gameDir = STOP;
 
     // more actions to be included
-    playerPos.pos->x = 10;
-    playerPos.pos->y = 10;
+    playerPos.pos->x = mainGameMechsRef -> getBoardSizeX()/2;
+    playerPos.pos->y = mainGameMechsRef -> getBoardSizeY()/2;
     playerPos.symbol = '@';
 
 }
@@ -18,18 +18,19 @@ Player::~Player()
 {
     // delete any heap members here
     // no keyword new in the constructor
-    // leave the destructor empty for now
+    // leave the destructor empty FOR NOW will have to change later
 }
 
 objPos Player::getPlayerPos() const
 {
-    // return the reference to the playerPos arrray list
+    // return the reference to the playerPos array list
     return playerPos;
 }
 
 void Player::updatePlayerDir()
 {
-        // PPA3 input processing logic    
+        // PPA3 input processing logic
+        char input = mainGameMechsRef->getInput(); 
         switch(input){
             case 'W':
             case 'w':

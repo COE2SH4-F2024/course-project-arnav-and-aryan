@@ -21,7 +21,7 @@ objPos::objPos(int xPos, int yPos, char sym)
 
 // destructor
 objPos::~objPos(){
-	delete[] this->pos;
+	delete[] this->pos; //deallocates array memory
 }
 
 // copy constructtor
