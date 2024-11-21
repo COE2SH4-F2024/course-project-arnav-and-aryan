@@ -27,9 +27,9 @@ class GameMechs
         GameMechs(int boardX, int boardY);
         ~GameMechs(); // is this one needed at all? Why or why not?
         
-        bool getExitFlagStatus() const; 
+        bool getExitFlagStatus(); 
         void setExitTrue();
-        bool getLoseFlagStatus() const;
+        bool getLoseFlagStatus() ;
         void setLoseFlag();
 
         char getInput();
@@ -39,7 +39,7 @@ class GameMechs
         int getBoardSizeX() const;
         int getBoardSizeY() const;
         
-        int getScore() const;
+        int getScore();
         void incrementScore();
         
         // More methods should be added here

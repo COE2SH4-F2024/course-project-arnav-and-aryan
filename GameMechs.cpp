@@ -27,14 +27,14 @@ GameMechs::~GameMechs()
    //can stay empty no mem allocated yet 
 }
 
-bool GameMechs::getExitFlagStatus() const
+bool GameMechs::getExitFlagStatus() 
 {
     return exitFlag;
 }
 
-bool GameMechs::getLoseFlagStatus() const
+bool GameMechs::getLoseFlagStatus() 
 {
-
+    return loseFlag;
 }
     
 
@@ -46,9 +46,9 @@ char GameMechs::getInput()
 
 }
 
-int GameMechs::getScore() const
+int GameMechs::getScore()
 {
-
+    return score;
 }
 
 void GameMechs::incrementScore()
