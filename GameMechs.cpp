@@ -6,8 +6,8 @@ GameMechs::GameMechs()
     exitFlag = false;
     loseFlag = false;
     score = 0;
-    boardSizeX = 20;
-    boardSizeY = 10;
+    boardSizeX = 28;
+    boardSizeY = 13;
     
 }
 
@@ -40,9 +40,7 @@ bool GameMechs::getLoseFlagStatus()
 
 char GameMechs::getInput()
 {
-    if(MacUILib_hasChar() != 0){
-        input = MacUILib_getChar();
-    }
+    return input;
 
 }
 
@@ -53,7 +51,7 @@ int GameMechs::getScore()
 
 void GameMechs::incrementScore()
 {
-    
+    score++;  //will have to change in bonus
 }
 
 int GameMechs::getBoardSizeX() const
@@ -69,22 +67,24 @@ int GameMechs::getBoardSizeY() const
 
 void GameMechs::setExitTrue()
 {
-
+    exitFlag = true;
 }
 
 void GameMechs::setLoseFlag()
 {
-    
+    loseFlag = true;
 }
 
 void GameMechs::setInput(char this_input)
 {
-
+    if(MacUILib_hasChar() != 0){
+        input = MacUILib_getChar();
+    }
 }
 
 void GameMechs::clearInput()
 {
-
+    input = 0;
 }
 
 // More methods should be added here
