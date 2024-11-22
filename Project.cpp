@@ -53,26 +53,31 @@ void Initialize(void)
 void GetInput(void)
 {
    
-   myGM->setInput(MacUILib_getChar());
+   myGM->setInput(myGM->getInput());
+
 
 
 }
 
 void RunLogic(void)
 {
-    
-    if(myGM->getInput() != 0){
-        myPlayer->updatePlayerDir();
+
+
+    if(myGM->getInput() == ' '){
+        myGM->setExitTrue();
     }
-
-    myPlayer->movePlayer();
-
+    else{
+        myPlayer->updatePlayerDir();
+        myPlayer->movePlayer();
+    }
+    myGM->clearInput();
+    
+    
 }
 
 void DrawScreen(void)
 {
     objPos playerPos = myPlayer->getPlayerPos();
-    //MacUILib_printf("Player [x, y, symbol] = [%d, %d, %c] \n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
     MacUILib_clearScreen();
     MacUILib_printf("##############################\n");
     int i=0;
