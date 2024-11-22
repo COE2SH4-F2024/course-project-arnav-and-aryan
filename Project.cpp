@@ -21,12 +21,11 @@ void LoopDelay(void);
 void CleanUp(void);
 
 
-
 int main(void)
 {
 
     Initialize();
-
+    myGM->generateFood(myPlayer->getPlayerPos());
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
@@ -71,13 +70,17 @@ void RunLogic(void)
         myPlayer->movePlayer();
     }
     myGM->clearInput();
-    
+    if(myGM->getFood().pos->x == myPlayer->getPlayerPos().pos->x && myGM->getFood().pos->y == myPlayer->getPlayerPos().pos->y){
+        myGM->generateFood(myPlayer->getPlayerPos());
+        //implement point scoring mechanism
+    }
     
 }
 
 void DrawScreen(void)
 {
     objPos playerPos = myPlayer->getPlayerPos();
+    objPos foodPos = myGM->getFood();
     MacUILib_clearScreen();
     MacUILib_printf("##############################\n");
     int i=0;
@@ -87,6 +90,9 @@ void DrawScreen(void)
         for(j = 1;  j< myGM->getBoardSizeX()+1; j++){
             if(i == playerPos.pos->y && j == playerPos.pos->x){
                 MacUILib_printf("%c",playerPos.symbol);
+            }
+            else if(i == foodPos.pos->y && j == foodPos.pos->x){
+                MacUILib_printf("%c",foodPos.symbol);
             }
             else{
                 MacUILib_printf(" ");

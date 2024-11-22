@@ -1,5 +1,6 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
+
 GameMechs::GameMechs()
 {
     input = 0;
@@ -8,7 +9,6 @@ GameMechs::GameMechs()
     score = 0;
     boardSizeX = 28;
     boardSizeY = 13;
-    
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -87,5 +87,27 @@ void GameMechs::clearInput()
 {
     input = 0;
 }
+void GameMechs::generateFood(objPos blockOff){
+    bool unique = false;
+    int x = 0, y = 0;
+    while (!unique) {
+            unique = true;
+            x = rand() % (boardSizeX - 1) + 1;
+            y = rand() % (boardSizeY - 1) + 1;
 
+            // Check if the coordinates overlap with the player's position
+            if (x == blockOff.pos->x && y == blockOff.pos->y) {
+                unique = false; //will rerun loop
+            }
+}
+    foodPos.pos->x = x;
+    foodPos.pos->y = y;
+    foodPos.symbol = '$';
+}
+
+objPos GameMechs::getFood() const
+{
+    // return the reference to the foodPos array list
+    return foodPos;
+}
 // More methods should be added here
