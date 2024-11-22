@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MacUILib.h"
 #include "objPos.h"
-
+#include "objPosArrayList.h"
 #include "Player.h"
 #include "GameMechs.h"
 using namespace std;
