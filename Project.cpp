@@ -11,7 +11,7 @@ using namespace std;
 // global pointer meant to instantiate a player object on the heap
 Player *myPlayer;
 GameMechs *myGM;
-
+objPosArrayList *arrayList;
 
 void Initialize(void);
 void GetInput(void);
@@ -25,7 +25,7 @@ int main(void)
 {
 
     Initialize();
-    myGM->generateFood(myPlayer->getPlayerPos());
+    myGM->generateFood(myPlayer->getPlayerPos()->getHeadElement());
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
@@ -45,7 +45,7 @@ void Initialize(void)
     MacUILib_clearScreen();
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
-    
+    arrayList = new objPosArrayList();
 
 }
 
@@ -69,9 +69,10 @@ void RunLogic(void)
         myPlayer->updatePlayerDir();
         myPlayer->movePlayer();
     }
+    objPos playerhead = myPlayer->getPlayerPos()->getHeadElement();
     myGM->clearInput();
-    if(myGM->getFood().pos->x == myPlayer->getPlayerPos().pos->x && myGM->getFood().pos->y == myPlayer->getPlayerPos().pos->y){
-        myGM->generateFood(myPlayer->getPlayerPos());
+    if(myGM->getFood().pos->x == playerhead.pos->x && myGM->getFood().pos->y == playerhead.pos->y){
+        myGM->generateFood(playerhead);
         //implement point scoring mechanism
     }
     
@@ -79,7 +80,8 @@ void RunLogic(void)
 
 void DrawScreen(void)
 {
-    objPos playerPos = myPlayer->getPlayerPos();
+    objPosArrayList* playerPos = myPlayer->getPlayerPos();
+    int playerSize = playerPos->getSize();
     objPos foodPos = myGM->getFood();
     MacUILib_clearScreen();
     MacUILib_printf("##############################\n");
@@ -88,13 +90,18 @@ void DrawScreen(void)
     for(i = 1;  i< myGM->getBoardSizeY()+1; i++){
         MacUILib_printf("#");
         for(j = 1;  j< myGM->getBoardSizeX()+1; j++){
-            if(i == playerPos.pos->y && j == playerPos.pos->x){
-                MacUILib_printf("%c",playerPos.symbol);
+            int k = 0,test = 0;
+            for (k = 0; k<playerSize; k++){
+                objPos body = playerPos->getElement(k);
+                if(i ==  body.pos->y && j == body.pos->x){
+                  MacUILib_printf("%c",body.symbol);
+                  test++;
             }
-            else if(i == foodPos.pos->y && j == foodPos.pos->x){
+            }
+            if(i == foodPos.pos->y && j == foodPos.pos->x){
                 MacUILib_printf("%c",foodPos.symbol);
             }
-            else{
+            else if (test == 0){
                 MacUILib_printf(" ");
             }    
     }
@@ -117,6 +124,6 @@ void CleanUp(void)
 
     delete myPlayer;
     delete myGM;
-
+    delete arrayList;
     MacUILib_uninit();
 }

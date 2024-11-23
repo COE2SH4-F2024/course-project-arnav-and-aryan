@@ -4,27 +4,25 @@
 Player::Player(GameMechs* thisGMRef)
 {
     mainGameMechsRef = thisGMRef;
+    PlayerPoslist = new objPosArrayList();
     gameDir = STOP;
-
+    objPos headPos(mainGameMechsRef -> getBoardSizeX()/2+1, mainGameMechsRef -> getBoardSizeY()/2+1, '@');
     // more actions to be included
-    playerPos.pos->x = mainGameMechsRef -> getBoardSizeX()/2+1;
-    playerPos.pos->y = mainGameMechsRef -> getBoardSizeY()/2+1;
-    playerPos.symbol = '@';
-
+    
+    PlayerPoslist->insertHead(headPos);
 }
 
 
 Player::~Player()
 {
     // delete any heap members here
-    // no keyword new in the constructor
-    // leave the destructor empty FOR NOW will have to change later
+    delete PlayerPoslist;
 }
 
-objPos Player::getPlayerPos() const
+objPosArrayList* Player::getPlayerPos() const
 {
     // return the reference to the playerPos array list
-    return playerPos;
+    return PlayerPoslist;
 }
 
 void Player::updatePlayerDir()
@@ -68,36 +66,43 @@ void Player::movePlayer()
     // PPA3 Finite State Machine logic
     // change later switch or else if
     // could mess up debug later
-
+    objPos tempPos (PlayerPoslist->getHeadElement().getObjPos().pos->x, PlayerPoslist->getHeadElement().getObjPos().pos->y, '@');
     if(gameDir == RIGHT){
-            playerPos.pos->x++;
+            tempPos.pos->x++;
         }
 
     if(gameDir == LEFT){
-            playerPos.pos->x--;
+            tempPos.pos->x--;
     }
     
     if(gameDir == UP){
-            playerPos.pos->y--;
+            tempPos.pos->y--;
     }
 
     if(gameDir == DOWN){
-            playerPos.pos->y++;
+            tempPos.pos->y++;
     }
 
-    if (playerPos.pos->x>28){
-        playerPos.pos->x = 1;
+    if (tempPos.pos->x>28){
+        tempPos.pos->x = 1;
     }
-    else if (playerPos.pos->x<1){
-        playerPos.pos->x= 28;
+    else if (tempPos.pos->x<1){
+        tempPos.pos->x= 28;
     }
-    else if (playerPos.pos->y<1){
-        playerPos.pos->y = 13;
+    else if (tempPos.pos->y<1){
+        tempPos.pos->y = 13;
     }
-    else if (playerPos.pos->y>13){
-        playerPos.pos->y = 1;
+    else if (tempPos.pos->y>13){
+        tempPos.pos->y = 1;
     }
+    PlayerPoslist->insertHead(tempPos);
+    PlayerPoslist-> removeTail();
 
+
+
+    //3b
+    //Insert what happens if food is eaten
+    //do not remove snake tail if food eaten
 }
 
 // More methods to be added

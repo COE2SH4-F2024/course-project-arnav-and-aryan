@@ -17,7 +17,7 @@ objPosArrayList::objPosArrayList()
     }
 
 }
-
+//finish rule of 6 later
 // Destructor
 objPosArrayList::~objPosArrayList()
 {
