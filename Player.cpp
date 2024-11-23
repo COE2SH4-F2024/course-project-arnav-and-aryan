@@ -107,7 +107,7 @@ void Player::movePlayer()
     //do not remove snake tail if food eaten
 
     if(PlayerPoslist->getHeadElement().getObjPos().pos->x == mainGameMechsRef->getFood().getObjPos().pos->x && PlayerPoslist->getHeadElement().getObjPos().pos->y == mainGameMechsRef->getFood().getObjPos().pos->y){
-        mainGameMechsRef->generateFood(PlayerPoslist->getHeadElement());
+        mainGameMechsRef->generateFood(PlayerPoslist);
 
         //implement point scoring mechanism
 

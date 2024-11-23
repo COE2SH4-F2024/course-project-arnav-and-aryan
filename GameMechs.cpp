@@ -1,6 +1,7 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
 #include <time.h>
+#include "objPosArrayList.h"
 GameMechs::GameMechs()
 {
     input = 0;
@@ -87,9 +88,10 @@ void GameMechs::clearInput()
 {
     input = 0;
 }
-void GameMechs::generateFood(objPos blockOff){
+void GameMechs::generateFood(objPosArrayList* blockOff){
     srand(time(NULL));
     bool unique = false;
+    int size = blockOff->getSize();
     int x = 0, y = 0;
     while (!unique) {
             unique = true;
@@ -97,8 +99,12 @@ void GameMechs::generateFood(objPos blockOff){
             y = rand() % (boardSizeY - 1) + 1;
 
             // Check if the coordinates overlap with the player's position
-            if (x == blockOff.pos->x && y == blockOff.pos->y) {
-                unique = false; //will rerun loop
+            int i;
+            for(i = 1; i< size; i++){
+                objPos body = blockOff->getElement(i);
+                if(x ==  body.pos->x && y == body.pos->y){
+                    unique =false;  
+                }
             }
 }
     foodPos.pos->x = x;

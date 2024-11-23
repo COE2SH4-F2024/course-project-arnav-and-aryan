@@ -27,7 +27,7 @@ int main(void)
 {
 
     Initialize();
-    myGM->generateFood(myPlayer->getPlayerPos()->getHeadElement());
+    myGM->generateFood(myPlayer->getPlayerPos());
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
@@ -113,7 +113,7 @@ void DrawScreen(void)
     MacUILib_printf("##############################\n");
     MacUILib_printf("Score: \t%d\n" , score);
     if(myGM->getLoseFlagStatus()){
-        MacUILib_printf("UR A FUCKING LOSER \n");
+        MacUILib_printf("YOU LOSE!!! \n");
     }
     else if(myGM->getExitFlagStatus()){
         
