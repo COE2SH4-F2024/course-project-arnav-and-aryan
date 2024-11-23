@@ -83,16 +83,16 @@ void Player::movePlayer()
             tempPos.pos->y++;
     }
 
-    if (tempPos.pos->x>28){
+    if (tempPos.pos->x>mainGameMechsRef->getBoardSizeX()){
         tempPos.pos->x = 1;
     }
     else if (tempPos.pos->x<1){
-        tempPos.pos->x= 28;
+        tempPos.pos->x= mainGameMechsRef->getBoardSizeX();
     }
     else if (tempPos.pos->y<1){
-        tempPos.pos->y = 13;
+        tempPos.pos->y = mainGameMechsRef->getBoardSizeY();
     }
-    else if (tempPos.pos->y>13){
+    else if (tempPos.pos->y>mainGameMechsRef->getBoardSizeY()){
         tempPos.pos->y = 1;
     }
 
@@ -114,8 +114,14 @@ void Player::movePlayer()
     }else{
         PlayerPoslist->removeTail();
     }
-
-
+    int i;
+    for(i = 1; i<PlayerPoslist->getSize(); i++){
+        objPos body = PlayerPoslist->getElement(i);
+        if(tempPos.pos->x ==  body.pos->x && tempPos.pos->y == body.pos->y){
+            mainGameMechsRef->setLoseFlag();
+            mainGameMechsRef->setExitTrue();
+    }
+    }
 
 
 }

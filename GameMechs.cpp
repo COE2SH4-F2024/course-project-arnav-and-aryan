@@ -1,6 +1,6 @@
 #include "GameMechs.h"
 #include "MacUILib.h"
-
+#include <time.h>
 GameMechs::GameMechs()
 {
     input = 0;
@@ -88,6 +88,7 @@ void GameMechs::clearInput()
     input = 0;
 }
 void GameMechs::generateFood(objPos blockOff){
+    srand(time(NULL));
     bool unique = false;
     int x = 0, y = 0;
     while (!unique) {
