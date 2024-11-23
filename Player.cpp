@@ -95,14 +95,29 @@ void Player::movePlayer()
     else if (tempPos.pos->y>13){
         tempPos.pos->y = 1;
     }
+
     PlayerPoslist->insertHead(tempPos);
-    PlayerPoslist-> removeTail();
+    
+
 
 
 
     //3b
     //Insert what happens if food is eaten
     //do not remove snake tail if food eaten
+
+    if(PlayerPoslist->getHeadElement().getObjPos().pos->x == mainGameMechsRef->getFood().getObjPos().pos->x && PlayerPoslist->getHeadElement().getObjPos().pos->y == mainGameMechsRef->getFood().getObjPos().pos->y){
+        mainGameMechsRef->generateFood(PlayerPoslist->getHeadElement());
+
+        //implement point scoring mechanism
+
+    }else{
+        PlayerPoslist->removeTail();
+    }
+
+
+
+
 }
 
 // More methods to be added

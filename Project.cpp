@@ -71,10 +71,7 @@ void RunLogic(void)
     }
     objPos playerhead = myPlayer->getPlayerPos()->getHeadElement();
     myGM->clearInput();
-    if(myGM->getFood().pos->x == playerhead.pos->x && myGM->getFood().pos->y == playerhead.pos->y){
-        myGM->generateFood(playerhead);
-        //implement point scoring mechanism
-    }
+   
     
 }
 
