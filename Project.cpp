@@ -12,8 +12,8 @@ using namespace std;
 Player *myPlayer;
 GameMechs *myGM;
 objPosArrayList *arrayList;
-int lose;
-int score;
+
+
 
 void Initialize(void);
 void GetInput(void);
@@ -27,7 +27,6 @@ int main(void)
 {
 
     Initialize();
-    myGM->generateFood(myPlayer->getPlayerPos());
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
@@ -48,7 +47,8 @@ void Initialize(void)
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
     arrayList = new objPosArrayList();
-    lose = 0, score = 0;
+    myGM->generateFood(myPlayer->getPlayerPos());
+    
 }
 
 void GetInput(void)
@@ -81,7 +81,7 @@ void DrawScreen(void)
 {
     objPosArrayList* playerPos = myPlayer->getPlayerPos();
     int playerSize = playerPos->getSize();
-    score = playerSize-1;
+    //score = playerSize-1;
     objPos foodPos = myGM->getFood();
     MacUILib_clearScreen();
     MacUILib_printf("##############################\n");
@@ -111,12 +111,13 @@ void DrawScreen(void)
 
 }
     MacUILib_printf("##############################\n");
-    MacUILib_printf("Score: \t%d\n" , score);
+    MacUILib_printf("Score: \t%d\n" , myGM->getScore());
     if(myGM->getLoseFlagStatus()){
+
         MacUILib_printf("YOU LOSE!!! \n");
-    }
-    else if(myGM->getExitFlagStatus()){
-        
+
+    }else if(myGM->getExitFlagStatus()){
+        MacUILib_printf("Game Exits");
     }
 }
 

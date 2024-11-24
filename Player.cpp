@@ -108,6 +108,7 @@ void Player::movePlayer()
 
     if(PlayerPoslist->getHeadElement().getObjPos().pos->x == mainGameMechsRef->getFood().getObjPos().pos->x && PlayerPoslist->getHeadElement().getObjPos().pos->y == mainGameMechsRef->getFood().getObjPos().pos->y){
         mainGameMechsRef->generateFood(PlayerPoslist);
+        mainGameMechsRef->incrementScore();
 
         //implement point scoring mechanism
 

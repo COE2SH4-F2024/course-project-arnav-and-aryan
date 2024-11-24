@@ -100,7 +100,7 @@ void GameMechs::generateFood(objPosArrayList* blockOff){
 
             // Check if the coordinates overlap with the player's position
             int i;
-            for(i = 1; i< size; i++){
+            for(i = 0; i< size; i++){
                 objPos body = blockOff->getElement(i);
                 if(x ==  body.pos->x && y == body.pos->y){
                     unique =false;  
