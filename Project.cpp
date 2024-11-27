@@ -84,8 +84,12 @@ void DrawScreen(void)
     //score = playerSize-1;
     objPos foodPos = myGM->getFood();
     MacUILib_clearScreen();
-    MacUILib_printf("##############################\n");
-    int i=0;
+    int i;
+    for (i = 0; i<myGM->getBoardSizeX()+2; i++){
+        MacUILib_printf("#");
+    }
+    MacUILib_printf("\n");
+
     int j = 0;
     for(i = 1;  i< myGM->getBoardSizeY()+1; i++){
         MacUILib_printf("#");
@@ -110,7 +114,10 @@ void DrawScreen(void)
     MacUILib_printf("\n");
 
 }
-    MacUILib_printf("##############################\n");
+    for (i = 0; i<myGM->getBoardSizeX()+2; i++){
+        MacUILib_printf("#");
+    }
+    MacUILib_printf("\n");
     MacUILib_printf("Score: \t%d\n" , myGM->getScore());
     if(myGM->getLoseFlagStatus()){
 
